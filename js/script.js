@@ -29,16 +29,52 @@ $(document).ready(function(){
         });
         customer_table += "</tbody>";
 
-        $("#container").html(customer_table);
+        $("#table").html(customer_table);
+
     }
     else 
     {
-        $("#container").html("There is no record!!");
+        $("#table").html("There is no record!!");
     };
 
     $("#customerList").on("click", "#btnRemove", function(){
         $(this).parents("tr").remove();
     });
 
+    function AddCustomer() {
+        var form = "";
+        form += "<form id='newCustomerForm' class='customerForm'>" +
+                "<div class='form-group'>";
+        form += "<div class='col-sm-6'><label for='name'>Name</label></div>";
+        form += "<div class='col-sm-6'><input type='text' id='name' class='form-control' required></div>" + 
+                "</div>" +
+                "<div class='form-group'>";
+        form += "<div class='col-sm-6'><label for='birthdate'>Birthdate</label></div>";
+        form += "<div class='col-sm-6'><input type='text' id='birthdate' class='form-control' required></div>" + 
+                "</div>";
+        form += "<div class='form-check'>" +
+                "<div class='col-sm-8'>" +
+                "<input type='checkbox' class='form-check-input' id='isSubcribed' name='Yes'><label for='isSubcribed'>Is Subcribed?</label>" + 
+                "</div><div class='col-sm-4'></div></div>";
+        form += "<div class='form-group'>" + "<div class='col-sm-8'>" +  
+                "<select class='custom-select my-1 mr-sm-2' id='membershipType'>" +
+                "<option selected>Choose...</option>" +
+                "<option value='1'>Pay As You Go</option>" +
+                "<option value='2'>Monthly</option>" +
+                "<option value='3'>Quarterly</option></select>"+ 
+                "</div><div class='col-sm-4'></div></div>" +
+                "<div class='col-sm-8'></div><div class='col-sm-4'><button class='btn btn-primary' type='submit'>Save</button></div>" + 
+                "</div></div>";
+        form += "</form>";
+
+        return form;
+    }
+
+    $("#myform").html(AddCustomer());
+
+    var customerForm = document.getElementById('#newCustomerForm');
+    customerForm.onsubmit=function() {
+        console.log(customerForm.name + customerForm.birthdate + customerForm.isSubcribed + customerForm.membershipType);
+    };
 });
     
